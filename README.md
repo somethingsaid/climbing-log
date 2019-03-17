@@ -7,4 +7,4 @@ Work in progress...
 
 ### 📖 Head over to the [documentation site](https://pwa-starter-kit.polymer-project.org/) for more details or check out [how to get started](https://pwa-starter-kit.polymer-project.org/setup)!
 
-![Deployment](https://climbing-log-8e6a2.firebaseapp.com)
+[Deployment](https://climbing-log-8e6a2.firebaseapp.com)
