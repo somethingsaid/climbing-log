@@ -1,11 +1,11 @@
 {
-  "name": "pwa-starter-kit",
-  "version": "0.9.0",
+  "name": "gau-dim",
+  "version": "0.1.0",
   "contributors": [
-    "The Polymer Authors"
+    "GDI"
   ],
   "license": "BSD-3-Clause",
-  "repository": "Polymer/pwa-starter-kit",
+  "repository": "somethingsaid/climbing-log",
   "scripts": {
     "start": "polymer serve",
     "build": "polymer build --auto-base-path && gulp prpl-server",
