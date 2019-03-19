@@ -206,7 +206,6 @@ class MyApp extends connect(store)(LitElement) {
           <a ?selected="${this._page === 'view1'}" href="/view1">View One</a>
           <a ?selected="${this._page === 'view2'}" href="/view2">View Two</a>
           <a ?selected="${this._page === 'view3'}" href="/view3">View Three</a>
-          <a ?selected="${this._page === 'authentication'}" href="/authentication">Authentication</a>
         </nav>
       </app-header>
 
@@ -218,7 +217,6 @@ class MyApp extends connect(store)(LitElement) {
           <a ?selected="${this._page === 'view1'}" href="/view1">View One</a>
           <a ?selected="${this._page === 'view2'}" href="/view2">View Two</a>
           <a ?selected="${this._page === 'view3'}" href="/view3">View Three</a>
-          <a ?selected="${this._page === 'authentication'}" href="/authentication">Authentication</a>
         </nav>
       </app-drawer>
 
@@ -227,7 +225,6 @@ class MyApp extends connect(store)(LitElement) {
         <my-view1 class="page" ?active="${this._page === 'view1'}"></my-view1>
         <my-view2 class="page" ?active="${this._page === 'view2'}"></my-view2>
         <my-view3 class="page" ?active="${this._page === 'view3'}"></my-view3>
-        <gau-dim-auth class="page" ?active="${this._page === 'authentication'}"></gau-dim-auth>
         <my-view404 class="page" ?active="${this._page === 'view404'}"></my-view404>
       </main>
 

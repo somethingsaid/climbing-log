@@ -65,6 +65,69 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <!-- Performance tip: hint to the browser to start the handshake for the fonts site -->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCfWcy6CW_vGJ4K4GcgrFXrevDZKPdqhT0",
+        authDomain: "climbing-log-8e6a2.firebaseapp.com",
+        databaseURL: "https://climbing-log-8e6a2.firebaseio.com",
+        projectId: "climbing-log-8e6a2",
+        storageBucket: "climbing-log-8e6a2.appspot.com",
+        messagingSenderId: "940845109662"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script>
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      ui.start('#firebaseui-auth-container', {
+        signInOptions: [
+          {
+            provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            requireDisplayName: false
+          },
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID
+        ],
+        // Other config options...
+      });
+
+      var uiConfig = {
+        callbacks: {
+          signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+            // User successfully signed in.
+            // Return type determines whether we continue the redirect automatically
+            // or whether we leave that to developer to handle.
+            return true;
+          },
+          uiShown: function() {
+            // The widget is rendered.
+            // Hide the loader.
+            document.getElementById('loader').style.display = 'none';
+          }
+        },
+        // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+        signInFlow: 'popup',
+        signInSuccessUrl: '/',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.EmailAuthProvider.PROVIDER_ID,
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID
+        ],
+        // Terms of service url.
+        tosUrl: '<your-tos-url>',
+        // Privacy policy url.
+        privacyPolicyUrl: '<your-privacy-policy-url>'
+      };
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
     <script>
       // Load and register pre-caching Service Worker
       if ('serviceWorker' in navigator) {
@@ -105,6 +168,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </head>
   <body>
     <my-app appTitle="gau dim"></my-app>
+    <section role="authentication">
+        <div id="firebaseui-auth-container"></div>
+        <div id="loader">Loading...</div>
+      </section>
     <noscript>
       Please enable JavaScript to view this website.
     </noscript>
