@@ -1,0 +1,41 @@
+[debug] [2019-04-12T12:56:00.385Z] ----------------------------------------------------------------------
+[debug] [2019-04-12T12:56:00.387Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2019-04-12T12:56:00.387Z] CLI Version:   6.5.0
+[debug] [2019-04-12T12:56:00.387Z] Platform:      darwin
+[debug] [2019-04-12T12:56:00.387Z] Node Version:  v8.10.0
+[debug] [2019-04-12T12:56:00.388Z] Time:          Fri Apr 12 2019 08:56:00 GMT-0400 (EDT)
+[debug] [2019-04-12T12:56:00.388Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-04-12T12:56:00.404Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-04-12T12:56:00.405Z] > authorizing via signed-in user
+[debug] [2019-04-12T12:56:00.405Z] [iam] checking project climbing-log-8e6a2 for permissions ["firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update"]
+[debug] [2019-04-12T12:56:00.407Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-04-12T12:56:00.408Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-04-12T12:56:00.596Z] <<< HTTP RESPONSE 200
+[debug] [2019-04-12T12:56:00.607Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/climbing-log-8e6a2:testIamPermissions  
+
+[debug] [2019-04-12T12:56:00.899Z] <<< HTTP RESPONSE 200
+[debug] [2019-04-12T12:56:00.900Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/climbing-log-8e6a2  
+ 
+[debug] [2019-04-12T12:56:01.175Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'climbing-log-8e6a2'...
+[info] 
+[info] i  deploying database, hosting
+[info] i  database: checking rules syntax...
+[debug] [2019-04-12T12:56:01.181Z] >>> HTTP REQUEST PUT https://climbing-log-8e6a2.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+[debug] [2019-04-12T12:56:01.434Z] Error: unable to get local issuer certificate
+    at TLSSocket.<anonymous> (_tls_wrap.js:1105:38)
+    at emitNone (events.js:106:13)
+    at TLSSocket.emit (events.js:208:7)
+    at TLSSocket._finishInit (_tls_wrap.js:639:8)
+    at TLSWrap.ssl.onhandshakedone (_tls_wrap.js:469:38)
+[error] 
+[error] Error: Server Error. unable to get local issuer certificate
