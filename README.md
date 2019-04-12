@@ -1,5 +1,5 @@
 # Polymer App Toolbox - Starter Kit
-
+[Deployed app](https://climbing-log-8e6a2.firebaseapp.com)
 [![Build Status](https://travis-ci.org/Polymer/polymer-starter-kit.svg?branch=master)](https://travis-ci.org/Polymer/polymer-starter-kit)
 
 This template is a starting point for building apps using a drawer-based
