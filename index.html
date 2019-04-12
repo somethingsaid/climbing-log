@@ -1,6 +1,6 @@
 <!--
 @license
-Copyright (c) 2018 The Polymer Project Authors. All rights reserved.
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
 The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
@@ -12,10 +12,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Gau Dim</title>
-    <meta name="generator" content="Gau Dim">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="climbing logger">
+    <meta name="generator" content="Polymer Starter Kit">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>My App</title>
+    <meta name="description" content="My App description">
 
     <!--
       The `<base>` tag below is present to support two advanced deployment options:
@@ -24,6 +25,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       Instead of manually editing the `<base>` tag yourself, you should generally either:
       a) Add a `basePath` property to the build configuration in your `polymer.json`.
       b) Use the `--base-path` command-line option for `polymer build`.
+
+      Note: If you intend to serve from a non-root path, see [polymer-root-path] below.
     -->
     <base href="/">
 
@@ -37,12 +40,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Gau Dim">
+    <meta name="application-name" content="My App">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Gau Dim">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="My App">
 
     <!-- Homescreen icons -->
     <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
@@ -56,128 +59,53 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="msapplication-TileColor" content="#3f51b5">
     <meta name="msapplication-tap-highlight" content="no">
 
-    <!-- Default twitter cards -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@username">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="gau-dim">
-    <meta property="og:image" content="images/manifest/icon-144x144.png" />
-
-    <!-- Performance tip: hint to the browser to start the handshake for the fonts site -->
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-
-    <!-- Firebase App is always required and must be first -->
-    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
-    <!-- Add additional services that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
     <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyCfWcy6CW_vGJ4K4GcgrFXrevDZKPdqhT0",
-        authDomain: "climbing-log-8e6a2.firebaseapp.com",
-        databaseURL: "https://climbing-log-8e6a2.firebaseio.com",
-        projectId: "climbing-log-8e6a2",
-        storageBucket: "climbing-log-8e6a2.appspot.com",
-        messagingSenderId: "940845109662"
-      };
-      firebase.initializeApp(config);
-    </script>
-    <script>
-      // Initialize the FirebaseUI Widget using Firebase.
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      ui.start('#firebaseui-auth-container', {
-        signInOptions: [
-          {
-            provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-            requireDisplayName: false
-          },
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID
-        ],
-        // Other config options...
-      });
+      /**
+      * [polymer-root-path]
+      *
+      * By default, we set `Polymer.rootPath` to the server root path (`/`).
+      * Leave this line unchanged if you intend to serve your app from the root
+      * path (e.g., with URLs like `my.domain/` and `my.domain/view1`).
+      *
+      * If you intend to serve your app from a non-root path (e.g., with URLs
+      * like `my.domain/my-app/` and `my.domain/my-app/view1`), edit this line
+      * to indicate the path from which you'll be serving, including leading
+      * and trailing slashes (e.g., `/my-app/`).
+      */
+      window.Polymer = {rootPath: '/'};
 
-      var uiConfig = {
-        callbacks: {
-          signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-            // User successfully signed in.
-            // Return type determines whether we continue the redirect automatically
-            // or whether we leave that to developer to handle.
-            return true;
-          },
-          uiShown: function() {
-            // The widget is rendered.
-            // Hide the loader.
-            document.getElementById('loader').style.display = 'none';
-          }
-        },
-        // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-        signInFlow: 'popup',
-        signInSuccessUrl: '/',
-        signInOptions: [
-          // Leave the lines as is for the providers you want to offer your users.
-          firebase.auth.EmailAuthProvider.PROVIDER_ID,
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID
-        ],
-        // Terms of service url.
-        tosUrl: '<your-tos-url>',
-        // Privacy policy url.
-        privacyPolicyUrl: '<your-privacy-policy-url>'
-      };
-      // The start method will wait until the DOM is loaded.
-      ui.start('#firebaseui-auth-container', uiConfig);
-    </script>
-    <script>
       // Load and register pre-caching Service Worker
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
           navigator.serviceWorker.register('service-worker.js', {
-            scope: '/',
+            scope: Polymer.rootPath,
           });
         });
       }
-
-      // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
-      // https://github.com/reactjs/redux/issues/2907
-      window.process = { env: { NODE_ENV: 'production' } };
     </script>
+
+    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <!-- Load your application shell -->
+    <link rel="import" href="src/my-app.html">
 
     <!-- Add any global styles for body, document, etc. -->
     <style>
-      @font-face {
-        font-family: 'Pacifico';
-        font-style: normal;
-        font-weight: 400;
-        src: local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/s/pacifico/v12/Q_Z9mv4hySLTMoMjnk_rCXYhjbSpvc47ee6xR_80Hnw.woff2) format('woff2');
-        /* The browser draws the text immediately in the fallback font if the font
-           isn't loaded, then swaps it with the webfont when it eventually loads
-           See: https://developers.google.com/web/updates/2016/02/font-display
-        */
-        font-display: swap;
-      }
       body {
         margin: 0;
-        /* This is a font-stack that tries to use the system-default sans-serifs first */
-        font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-family: 'Roboto', 'Noto', sans-serif;
         line-height: 1.5;
         min-height: 100vh;
-        -webkit-font-smoothing: antialiased;
+        background-color: #eeeeee;
       }
     </style>
   </head>
   <body>
-    <my-app appTitle="gau dim"></my-app>
-    <section role="authentication">
-        <div id="firebaseui-auth-container"></div>
-        <div id="loader">Loading...</div>
-      </section>
+    <my-app></my-app>
     <noscript>
       Please enable JavaScript to view this website.
     </noscript>
-    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <!-- Built with love using PWA Starter Kit -->
-    <script type="module" src="src/components/my-app.js"></script>
+    <!-- Built with love using Polymer Starter Kit -->
   </body>
 </html>
