@@ -1,6 +1,8 @@
 # Polymer App Toolbox - Starter Kit
 [Deployed app](https://climbing-log-8e6a2.firebaseapp.com)
 [![Build Status](https://travis-ci.com/somethingsaid/climbing-log.svg?branch=master)](https://travis-ci.com/somethingsaid/climbing-log)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bc85c48c8f6cd27640b3/maintainability)](https://codeclimate.com/github/somethingsaid/climbing-log/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/bc85c48c8f6cd27640b3/test_coverage)](https://codeclimate.com/github/somethingsaid/climbing-log/test_coverage)
 
 This template is a starting point for building apps using a drawer-based
 layout. The layout is provided by `app-layout` elements.
