@@ -1,0 +1,74 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="app-auth.html">
+
+<dom-module id="my-signup">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+    </style>
+
+    <firebase-auth id="auth" user="{{user}}" status-known="{{statusKnown}}"></firebase-auth>
+
+    <div class="card">
+      <h2>Sign Up</h2>
+      <div>
+          <paper-input id="email" label="Email" required auto-validate type="email"></paper-input>
+          <paper-input id="password" label="Password" required auto-validate minlength="6" type="password" error-message="Minimum 6 letters required"></paper-input>
+          <paper-input id="confirmPassword" label="Confirm Password" required auto-validate minlength="6" type="password" error-message="Passwords don't match"></paper-input>
+          <div class="layout horizontal" style="margin-top: 15px">
+              <paper-button class="flex" raised on-tap="signUp">Sign Up</paper-button>
+          </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class MySignup extends Polymer.Element {
+      static get is() { return 'my-signup'; }
+      static get properties() {
+        return {
+          user: {
+            type: Object,
+            notify: true
+          },
+          statusKnown: {
+              type: Object
+          } 
+        };
+      }
+      signUp() {
+        if (this._passwordsMatch()) {
+          this._createEmail();
+        }
+      }
+      _createEmail() {
+        this.$.auth.createUserWithEmailAndPassword(this.$.email.value, this.$.password.value)
+              .then(this.handleSuccess.bind(this));
+      }
+      _passwordsMatch() {
+        let password = this.$.password.value;
+        let confirmPassword = this.$.confirmPassword.value;
+        return  password === confirmPassword;
+      }
+      handleSuccess(response) {
+          this.user = response;
+          window.location.href = '/home'
+      }
+    }
+    window.customElements.define(MySignup.is, MySignup);
+  </script>
+</dom-module>

@@ -9,6 +9,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="app-auth">
@@ -64,13 +67,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div class="layout horizontal" style="margin-top: 15px">
                 <paper-button class="flex" raised on-tap="signIn">Sign In/Create</paper-button>
             </div>
-            <hr>
-            <div class="google-sign-in"
-                 tabindex="0"
-                 on-tap="googleSignIn">
-                <span class="google-sign-in-icon"></span>
-                <span class="google-sign-in-label">Google</span>
-            </div>
         </div>
     </paper-dialog>
 </template>
@@ -90,10 +86,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         };
       }
       signIn() {
-        // TODO 
+        this._createEmail();
+        this._emailSignIn();
+      }
+      _emailSignIn() {
+          this.$.auth.signInWithEmailAndPassword(this.$.email.value, this.$.password.value)
+              .then(this.handleSuccess)
+              .catch(this.handleError);
+      }
+      
+      _createEmail() {
+          this.$.auth.createUserWithEmailAndPassword(this.$.email.value, this.$.password.value)
+              .then(this.handleSuccess)
+              .catch(this.handleError);
       }
     }
-
     window.customElements.define(AppAuth.is, AppAuth);
   </script>
 </dom-module>
