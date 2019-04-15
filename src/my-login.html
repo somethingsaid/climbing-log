@@ -1,0 +1,83 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-login">
+  <template>
+    <style include="shared-styles iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+      }
+      .card.tall {
+        height: 80vh;
+        padding: 48px;
+      }
+    </style>
+
+    <firebase-auth id="auth" user="{{user}}" status-known="{{statusKnown}}"></firebase-auth>
+
+    <div class="card tall layout vertical">
+      <div class="text-center">
+        <img src="../images/joylogo.svg" width="150px">
+      </div>
+      <h1 class="text-center">login</h1>
+      <div class="flex">
+        <paper-input id="email" label="email" required auto-validate type="email"></paper-input>
+        <paper-input id="password" label="password" required auto-validate minlength="6" type="password" error-message="Minimum 6 letters required"></paper-input>
+      </div>
+      <div class="text-center">
+        <paper-button class="wide submit" raised on-tap="logIn">login</paper-button>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class MyLogin extends Polymer.Element {
+      static get is() { return 'my-login'; }
+      static get properties() {
+        return {
+          user: {
+            type: Object,
+            notify: true,
+            observer: '_userChanged'
+          },
+          statusKnown: {
+              type: Object
+          } 
+        };
+      }
+      logIn() {
+        this._emailLogIn();
+      }
+      _emailLogIn() {
+        this.$.auth.signInWithEmailAndPassword(this.$.email.value, this.$.password.value)
+              .then(this.handleSuccess.bind(this));
+      }
+      _userChanged() {
+        if (this.user) {
+            console.log('user changed: ', this.user);
+        //   window.location.href = '/post';
+        }
+      }
+      handleSuccess(response) {
+          this.user = response;
+        //   window.location.href = '/post';
+      }
+    }
+    window.customElements.define(MyLogin.is, MyLogin);
+  </script>
+</dom-module>
